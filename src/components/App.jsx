@@ -20,10 +20,7 @@ export class App extends Component {
     filter: '',
   };
   addContact = ({ name, number }) => {
-    if (name.trim() === '' || number.trim() === '') {
-      Notify.warning('Please enter some name and valid number');
-      return false;
-    } else if (this.isDuplicated(name)) {
+    if (this.isDuplicated(name)) {
       Notify.failure(`${name} is already in contacts.`);
       return false;
     } else if (this.isDuplicated(number)) {
@@ -91,7 +88,7 @@ export class App extends Component {
         <Title text="Phonebook" />
         <ContactForm onSubmit={addContact} />
         <Title text="Contacts" />
-        <ContactFilter handleChange={handleFilter} />
+        <ContactFilter handleChange={handleFilter} value={this.state.filter} />
         <ContactList contacts={filterdContacts} handleRemove={removeContact} />
       </div>
     );
